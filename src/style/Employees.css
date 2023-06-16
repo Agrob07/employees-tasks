@@ -1,0 +1,71 @@
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(177, 196, 194, 1) 0%,
+    rgba(0, 212, 255, 1) 100%
+  );
+}
+
+.add-employees {
+  height: 50%;
+  height: 100vh;
+  display: flex;
+}
+
+.add-employees > form {
+  margin: 1%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.btn-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn {
+  margin: 2rem;
+  height: 3rem;
+  width: 12rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10rem;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  background-color: rgb(77, 139, 163);
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgb(57, 178, 226);
+  }
+}
+
+.employees-list {
+  width: 100%;
+  height: inherit;
+}
+
+.table-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
