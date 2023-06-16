@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { api } from "../../api/";
 import DataTable from "../table/DataTable";
 import "../../style/Employees.css";
-import ConfirmationModal from "../ConfirmationModal";
-import { toast } from "react-toastify";
 
 const EmployeesList = () => {
   const [initData, setInitData] = useState([]);
@@ -48,9 +46,10 @@ const EmployeesList = () => {
     },
   });
 
-  const handleDelete = (id) => {
-    setModalOpen(true);
-    setEmpId(id);
+  const handleDelete = async (empId) => {
+    try {
+      const data = await api.deleteEmployee(empId);
+    } catch (error) {}
   };
 
   const getData = async () => {
@@ -76,20 +75,11 @@ const EmployeesList = () => {
   };
 
   return (
-    <>
-      <div className="employees-list">
-        {initData && (
-          <DataTable columns={finalColumns} data={initData} />
-        )}
-
-        <ConfirmationModal
-          isOpen={isModalOpen}
-          message="Are you sure ?"
-          onConfirm={handleConfirm}
-          onCancel={handleCancel}
-        />
-      </div>
-    </>
+    <div className="employees-list">
+      {initData && (
+        <DataTable columns={finalColumns} data={initData} />
+      )}
+    </div>
   );
 };
 
