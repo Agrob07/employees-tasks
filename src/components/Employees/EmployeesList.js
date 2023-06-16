@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { api } from "../../api/";
 import DataTable from "../table/DataTable";
-import { toast } from "react-toastify";
+import "../../style/Employees.css";
 
 const EmployeesList = () => {
   const [initData, setInitData] = useState([]);
@@ -22,12 +22,10 @@ const EmployeesList = () => {
           ? {
               Header: key.toUpperCase(),
               accessor: (d) => d.completed.toString(),
-              width: 100,
             }
           : {
               Header: key.toUpperCase(),
               accessor: key,
-              width: 300,
             }
       )
     : [];
@@ -49,18 +47,7 @@ const EmployeesList = () => {
   const handleDelete = async (empId) => {
     try {
       const data = await api.deleteEmployee(empId);
-      console.log(data);
     } catch (error) {}
-    // async (row) => {
-    //   try {
-    //     const data = await api.deleteEmployee(row.id);
-    //     toast.success(
-    //       `Employee (ID: ${data.data.id}) successfully created !`
-    //     );
-    //   } catch (error) {}
-    //   // console.log(row.id);
-    //   // delete row.cells[rowIndex];
-    // };
   };
 
   const getData = async () => {
@@ -72,7 +59,7 @@ const EmployeesList = () => {
     <div className="employees-list">
       {initData && (
         <DataTable columns={finalColumns} data={initData} />
-      )}{" "}
+      )}
     </div>
   );
 };

@@ -35,7 +35,7 @@ export const api = {
     try {
       return await axios.put(`${baseUrl}/${id}`);
     } catch (error) {
-      console.error("Failed to delete employees:", error.message);
+      console.error("Failed to update employees:", error.message);
     }
   },
 };

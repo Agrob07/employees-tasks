@@ -9,9 +9,8 @@ const Pagination = ({
   canNextPage,
 }) => {
   return (
-    <div className="flex justify-center m-2 gap-8">
+    <div>
       <button
-        className="px-6 py-2 rounded bg-slate-500 text-yellow-50"
         onClick={() => previousPage()}
         disabled={!canPreviousPage}
       >
@@ -23,11 +22,7 @@ const Pagination = ({
           {pageIndex + 1} of {pageOptions.length}
         </strong>
       </span>
-      <button
-        onClick={() => nextPage()}
-        disabled={!canNextPage}
-        className="px-8 py-2 rounded bg-slate-500 text-yellow-50"
-      >
+      <button onClick={() => nextPage()} disabled={!canNextPage}>
         Next
       </button>
     </div>

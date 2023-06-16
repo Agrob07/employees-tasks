@@ -3,6 +3,7 @@ import { useTable, usePagination, useSortBy } from "react-table";
 import Pagination from "./components/Pagination";
 import Rows from "./components/Rows";
 import Columns from "./components/Columns";
+import "../../style/Employees.css";
 
 const DataTable = ({ columns, data }) => {
   const {
@@ -23,14 +24,11 @@ const DataTable = ({ columns, data }) => {
     usePagination
   );
 
-  
-
   return (
     <div>
       <table
         {...getTableProps()}
-        className=" bg-white-500"
-        style={{ width: "100%" }}
+        className="table-wrapper"
       >
         <thead>
           <Columns headerGroups={headerGroups} />

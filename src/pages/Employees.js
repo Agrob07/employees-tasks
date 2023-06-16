@@ -14,6 +14,7 @@ const Employees = () => {
       toast.success(
         `Employee (ID: ${data.data.id}) successfully created !`
       );
+      api.getEmployees();
     } catch (error) {
       toast.error("Something went Wrong!");
     }

@@ -16,7 +16,7 @@ const Columns = ({ headerGroups }) => {
               <span>
                 {column.isSorted ? (
                   column.isSortedDesc ? (
-                    <FaAngleDown className="flex" />
+                    <FaAngleDown />
                   ) : (
                     <FaAngleUp />
                   )
