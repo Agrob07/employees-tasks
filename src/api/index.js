@@ -26,7 +26,7 @@ export const api = {
   },
   deleteEmployee: async (id) => {
     try {
-      return await axios.delete(`${baseUrl}/?id=1`);
+      return await axios.delete(`${baseUrl}/${id}`);
     } catch (error) {
       console.error("Failed to delete employees:", error.message);
     }

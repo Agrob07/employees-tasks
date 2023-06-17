@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import { api } from "../../api/";
 import DataTable from "../table/DataTable";
 import "../../style/Employees.css";
+import ConfirmationModal from "../ConfirmationModal";
+import { toast } from "react-toastify";
 
 const EmployeesList = () => {
   const [initData, setInitData] = useState([]);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [empId, setEmpId] = useState(null);
 
   useEffect(
     () => async () => {
@@ -44,10 +48,9 @@ const EmployeesList = () => {
     },
   });
 
-  const handleDelete = async (empId) => {
-    try {
-      const data = await api.deleteEmployee(empId);
-    } catch (error) {}
+  const handleDelete = (id) => {
+    setModalOpen(true);
+    setEmpId(id);
   };
 
   const getData = async () => {
@@ -55,12 +58,38 @@ const EmployeesList = () => {
     return data.data;
   };
 
+  const handleConfirm = async () => {
+    try {
+      const data = await api.deleteEmployee(empId);
+      console.log(data);
+      toast.success(`Employee (ID: ${empId}) successfully deleted !`);
+      setModalOpen(false);
+      api.getEmployees();
+    } catch (error) {
+      toast.error("Something went Wrong!");
+    }
+  };
+
+  const handleCancel = () => {
+    // Handle the cancellation logic here
+    setModalOpen(false);
+  };
+
   return (
-    <div className="employees-list">
-      {initData && (
-        <DataTable columns={finalColumns} data={initData} />
-      )}
-    </div>
+    <>
+      <div className="employees-list">
+        {initData && (
+          <DataTable columns={finalColumns} data={initData} />
+        )}
+
+        <ConfirmationModal
+          isOpen={isModalOpen}
+          message="Are you sure ?"
+          onConfirm={handleConfirm}
+          onCancel={handleCancel}
+        />
+      </div>
+    </>
   );
 };
 
