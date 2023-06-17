@@ -1,92 +1,85 @@
-import React, { useEffect, useState } from "react";
-import { api } from "../../api/";
+import React, { useCallback, useMemo, useState } from "react";
+
 import DataTable from "../table/DataTable";
+import useEmployees from "../../hooks/useEmployees";
+import EmployeeModal from "../modals/EmployeeModal";
+
+import { initialActions } from "../../util/data/actions";
+import { getColumns } from "../../util/helpers/getColumns";
+import { DELETE, UPDATE } from "../../util/data/actionTypes";
+
 import "../../style/Employees.css";
-import ConfirmationModal from "../ConfirmationModal";
-import { toast } from "react-toastify";
 
 const EmployeesList = () => {
-  const [initData, setInitData] = useState([]);
-  const [isModalOpen, setModalOpen] = useState(false);
+  const { employees } = useEmployees();
   const [empId, setEmpId] = useState(null);
+  const [actions, setActions] = useState(initialActions);
 
-  useEffect(
-    () => async () => {
-      if (!initData.length) {
-        const data = await getData();
-        setInitData(data);
+  const handleAction = useCallback(
+    (action, id) => {
+      setEmpId(id);
+      switch (action) {
+        case DELETE:
+          setActions({ ...actions, delete: true });
+          break;
+        case UPDATE:
+          setActions({ ...actions, update: true });
+          break;
+        default:
+          setActions(initialActions);
       }
     },
-    [initData.length]
+    [actions]
   );
 
-  const columns = initData[0]
-    ? Object.keys(initData[0]).map((key) =>
-        key === "completed"
-          ? {
-              Header: key.toUpperCase(),
-              accessor: (d) => d.completed.toString(),
-            }
-          : {
-              Header: key.toUpperCase(),
-              accessor: key,
-            }
-      )
-    : [];
+  const onEditEmployee = useMemo(
+    () => employees.find((data) => data.id === empId),
+    [empId, employees]
+  );
+  
+  const columns = useMemo(() => getColumns(employees), [employees]);
 
-  const finalColumns = columns.concat({
-    Header: "Actions",
-    Cell: ({ row }) => {
-      return (
-        <div className="table-btns">
-          <button onClick={() => handleDelete(row.original.id)}>
-            Delete
-          </button>
-          <button>Update</button>
-        </div>
-      );
-    },
-  });
-
-  const handleDelete = (id) => {
-    setModalOpen(true);
-    setEmpId(id);
-  };
-
-  const getData = async () => {
-    const data = await api.getEmployees();
-    return data.data;
-  };
-
-  const handleConfirm = async () => {
-    try {
-      const data = await api.deleteEmployee(empId);
-      console.log(data);
-      toast.success(`Employee (ID: ${empId}) successfully deleted !`);
-      setModalOpen(false);
-      api.getEmployees();
-    } catch (error) {
-      toast.error("Something went Wrong!");
-    }
-  };
-
-  const handleCancel = () => {
-    // Handle the cancellation logic here
-    setModalOpen(false);
-  };
+  const finalColumns = useMemo(
+    () => [
+      ...columns,
+      {
+        Header: "Actions",
+        Cell: ({ row }) => {
+          return (
+            <div className="table-btns">
+              <button
+                onClick={(e) =>
+                  handleAction(e.target.innerText, row.original.id)
+                }
+              >
+                Delete
+              </button>
+              <button
+                onClick={(e) =>
+                  handleAction(e.target.innerText, row.original.id)
+                }
+              >
+                Update
+              </button>
+            </div>
+          );
+        },
+      },
+    ],
+    [columns, handleAction]
+  );
 
   return (
     <>
       <div className="employees-list">
-        {initData && (
-          <DataTable columns={finalColumns} data={initData} />
+        {employees && (
+          <DataTable columns={finalColumns} data={employees} />
         )}
-
-        <ConfirmationModal
-          isOpen={isModalOpen}
-          message="Are you sure ?"
-          onConfirm={handleConfirm}
-          onCancel={handleCancel}
+        <EmployeeModal
+          empId={empId}
+          actions={actions}
+          setActions={setActions}
+          onEditEmployee={onEditEmployee}
         />
       </div>
     </>

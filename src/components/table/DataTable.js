@@ -1,35 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTable, usePagination, useSortBy } from "react-table";
-import Pagination from "./components/Pagination";
+
 import Rows from "./components/Rows";
 import Columns from "./components/Columns";
+import Pagination from "./components/Pagination";
+
 import "../../style/Employees.css";
 
 const DataTable = ({ columns, data }) => {
+  const [pageSize] = useState(5);
+
   const {
-    getTableProps,
     getTableBodyProps,
-    headerGroups,
-    page,
+    getTableProps,
     prepareRow,
-    nextPage,
-    previousPage,
-    canNextPage,
     canPreviousPage,
+    previousPage,
+    headerGroups,
     pageOptions,
+    canNextPage,
+    nextPage,
+    page,
     state: { pageIndex },
   } = useTable(
-    { columns, data, initialState: { pageSize: 8 } },
+    { columns, data, initialState: { pageSize } },
     useSortBy,
     usePagination
   );
 
   return (
     <div>
-      <table
-        {...getTableProps()}
-        className="table-wrapper"
-      >
+      <table {...getTableProps()} className="table-wrapper">
         <thead>
           <Columns headerGroups={headerGroups} />
         </thead>

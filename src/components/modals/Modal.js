@@ -1,12 +1,7 @@
 import React from "react";
-import "../style/modal.css";
+import "../../style/modal.css";
 
-const ConfirmationModal = ({
-  isOpen,
-  message,
-  onConfirm,
-  onCancel,
-}) => {
+const Modal = ({ isOpen, onConfirm, onCancel, children }) => {
   if (!isOpen) {
     return null;
   }
@@ -15,9 +10,13 @@ const ConfirmationModal = ({
     isOpen && (
       <div className="modal">
         <div className="modal-content">
-          <p>{message}</p>
+          {children}
           <div className="modal-buttons">
-            <button className="confirm-button" onClick={onConfirm}>
+            <button
+              type="submit"
+              className="confirm-button"
+              onClick={onConfirm}
+            >
               Confirm
             </button>
             <button className="cancel-button" onClick={onCancel}>
@@ -30,4 +29,4 @@ const ConfirmationModal = ({
   );
 };
 
-export default ConfirmationModal;
+export default Modal;

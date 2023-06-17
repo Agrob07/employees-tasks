@@ -19,7 +19,6 @@
 }
 
 .add-employees {
-  height: 50%;
   height: 100vh;
   display: flex;
   @media screen and (max-device-width: 640px),
@@ -89,15 +88,15 @@
 .table-wrapper {
   width: 100%;
   border-collapse: collapse;
-
 }
 
 .table-wrapper th,
 .table-wrapper td {
   padding: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid hsl(0, 28%, 45%);
 }
 
 .table-wrapper th {
-  background-color: #f2f2f2;
+  color: rgb(0, 0, 0);
+  background-color: #ebebeb;
 }

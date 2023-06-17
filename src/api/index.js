@@ -5,9 +5,7 @@ const baseUrl = "https://rocky-temple-83495.herokuapp.com/employees";
 export const api = {
   getEmployees: async (page, limit) => {
     try {
-      return await axios.get(baseUrl, {
-        params: { page, limit },
-      });
+      return await axios.get(baseUrl, { page, limit });
     } catch (error) {
       console.error("Failed to fetch employees:", error.message);
     }
@@ -31,9 +29,9 @@ export const api = {
       console.error("Failed to delete employees:", error.message);
     }
   },
-  updateEmployee: async (id) => {
+  updateEmployee: async (id, updatedData) => {
     try {
-      return await axios.put(`${baseUrl}/${id}`);
+      return await axios.put(`${baseUrl}/${id}`, updatedData);
     } catch (error) {
       console.error("Failed to update employees:", error.message);
     }
