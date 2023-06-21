@@ -5,7 +5,7 @@ import Rows from "./components/Rows";
 import Columns from "./components/Columns";
 import Pagination from "./components/Pagination";
 
-import "../../style/Employees.css";
+import "../../style/table.css";
 
 const DataTable = ({ columns, data }) => {
   const [pageSize] = useState(5);

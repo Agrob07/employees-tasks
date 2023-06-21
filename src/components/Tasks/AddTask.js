@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import EmployeeModal from "../modals/EmployeeModal";
+import TaskModal from "../modals/TaskModal";
 import { initialActions } from "../../util/data/actions";
 
-const AddEmployee = () => {
+const AddTask = () => {
   const [actions, setActions] = useState(initialActions);
 
   return (
@@ -11,15 +11,15 @@ const AddEmployee = () => {
         <button
           className="btn"
           onClick={() => {
-            setActions({ ...initialActions, create: true });
+            setActions({ ...actions, create: true });
           }}
         >
-          Add Employees
+          Add Task
         </button>
+        <TaskModal actions={actions} setActions={setActions}/>
       </div>
-      <EmployeeModal actions={actions} setActions={setActions} />
     </div>
   );
 };
 
-export default AddEmployee;
+export default AddTask;

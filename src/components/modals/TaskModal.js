@@ -1,29 +1,20 @@
 import React from "react";
-import { toast } from "react-toastify";
-
 import Modal from "./Modal";
-import { api } from "../../api";
-import EmployeeForm from "../Employees/EmployeeForm";
-import useEmployees from "../../hooks/useEmployees";
+import TaskForm from "../Tasks/TaskForm";
 import { initialActions } from "../../util/data/actions";
-import { employeesApi } from "../../util/config";
+import { api } from "../../api";
+import { taskApi } from "../../util/config";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { fetchAllTasks } from "../../redux/slice/tasksSlice";
 
-const EmployeeModal = ({
-  empId,
-  actions,
-  setActions,
-  onEditEmployee,
-}) => {
-  const { setEmployees } = useEmployees();
-
-  const handleCreation = async (values) => {
+const TaskModal = ({ actions, setActions, onEditTask }) => {
+  const dispatch = useDispatch();
+  const handleCreation = async (val) => {
     try {
-      const data = await api.createRequest(employeesApi, values);
-      toast.success(
-        `Employee (ID: ${data.id}) successfully created !`
-      );
-      const newData = await api.getData(employeesApi);
-      setEmployees(newData);
+      await api.createRequest(`${taskApi}`, val);
+      dispatch(fetchAllTasks());
+      toast.success(`Employee (ID: ) successfully created !`);
     } catch (error) {
       toast.error("Something went Wrong!");
     }
@@ -31,10 +22,9 @@ const EmployeeModal = ({
   };
   const handleDelete = async () => {
     try {
-      await api.deleteById(employeesApi, empId);
-      toast.success(`Employee (ID: ${empId}) successfully deleted !`);
-      const newData = await api.getData(employeesApi);
-      setEmployees(newData);
+      await api.deleteById(taskApi, onEditTask.id);
+      dispatch(fetchAllTasks());
+      toast.success(`Employee (ID: ) successfully created !`);
     } catch (error) {
       toast.error("Something went Wrong!");
     }
@@ -44,10 +34,9 @@ const EmployeeModal = ({
 
   const handleEdit = async (val) => {
     try {
-      await api.updateById(employeesApi, val.id, val);
-      toast.success(`Employee (ID: ${empId}) successfully updated !`);
-      const newData = await api.getData(employeesApi);
-      setEmployees(newData);
+      await api.updateById(taskApi, onEditTask.id, val);
+      dispatch(fetchAllTasks());
+      toast.success(`Employee (ID: ) successfully created !`);
     } catch (error) {
       toast.error("Something went Wrong!");
     }
@@ -73,15 +62,14 @@ const EmployeeModal = ({
   return (
     <>
       {(actions.create || actions.update) && (
-        <EmployeeForm
-          onEditEmployee={onEditEmployee}
-          isModalOpen={
-            actions.delete || actions.update || actions.create
-          }
+        <TaskForm
+          onEditTask={onEditTask}
+          isModalOpen={actions.create || actions.update}
           handleSubmit={handleConfirm}
           handleCancel={handleCancel}
         />
       )}
+
       <Modal
         isOpen={actions.delete}
         onCancel={handleCancel}
@@ -93,4 +81,4 @@ const EmployeeModal = ({
   );
 };
 
-export default EmployeeModal;
+export default TaskModal;

@@ -1,0 +1,25 @@
+.table-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.employees-list {
+  overflow-x: auto;
+}
+
+.table-wrapper {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-wrapper th,
+.table-wrapper td {
+  padding: 8px;
+  border: 1px solid hsl(0, 28%, 45%);
+}
+
+.table-wrapper th {
+  color: rgb(0, 0, 0);
+  background-color: #ebebeb;
+}

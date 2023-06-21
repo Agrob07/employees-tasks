@@ -1,8 +1,8 @@
 import React from "react";
 import { Formik } from "formik";
 
-import FormContent from "./FormContent";
-import { validationFormik as validationSchema } from "../../constant/validationFormik";
+import EmployeeFormContent from "./EmployeeFormContent";
+import { employeeValidation as validationSchema } from "../../util/constant/employeeValidation";
 
 const emptyValues = {
   name: "",
@@ -11,7 +11,7 @@ const emptyValues = {
   position: "",
 };
 
-const FormikForm = ({
+const EmployeeForm = ({
   handleSubmit,
   onEditEmployee,
   isModalOpen,
@@ -25,7 +25,7 @@ const FormikForm = ({
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      <FormContent
+      <EmployeeFormContent
         isModalOpen={isModalOpen}
         handleCancel={handleCancel}
       />
@@ -33,4 +33,4 @@ const FormikForm = ({
   );
 };
 
-export default FormikForm;
+export default EmployeeForm;

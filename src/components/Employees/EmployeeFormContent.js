@@ -3,14 +3,9 @@ import { Form, useFormikContext } from "formik";
 
 import Modal from "../modals/Modal";
 
-const FormContent = ({ isModalOpen, handleCancel }) => {
-  const {
-    errors,
-    values,
-    touched,
-    submitForm,
-    handleChange,
-  } = useFormikContext();
+const EmployeeFormContent = ({ isModalOpen, handleCancel }) => {
+  const { errors, values, touched, submitForm, handleChange } =
+    useFormikContext();
 
   return (
     <Modal
@@ -73,4 +68,4 @@ const FormContent = ({ isModalOpen, handleCancel }) => {
   );
 };
 
-export default FormContent;
+export default EmployeeFormContent;
