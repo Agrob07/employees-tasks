@@ -1,10 +1,26 @@
-export const getColumns = (source) => {
+import { Link } from "react-router-dom";
+import { checkType } from "./checkType";
+import { EMPLOYEES } from "../data/contentTypes";
+
+export const getColumns = (source, type = EMPLOYEES) => {
+  const longest = checkType(source, type);
+
   return source.length && typeof source[0] === "object"
-    ? Object.keys(source[0]).map((key) =>
-        key === "completed"
+    ? Object.keys(longest).map((key) =>
+        key === "name"
           ? {
               Header: key.toUpperCase(),
-              accessor: (d) => d.completed.toString(),
+              Cell: ({ row }) => (
+                <Link
+                  to={`/employees/${
+                    type === EMPLOYEES
+                      ? row.original.id
+                      : row.original.employeeId
+                  }`}
+                >
+                  {row.original.name}
+                </Link>
+              ),
             }
           : {
               Header: key.toUpperCase(),

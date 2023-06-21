@@ -1,37 +1,43 @@
 import axios from "axios";
 
-const baseUrl = "https://rocky-temple-83495.herokuapp.com/employees";
-
 export const api = {
-  getEmployees: async (page, limit) => {
+  getDataById: async (url, id) => {
+    const finalUrl = id ? `${url}/${id}` : url;
     try {
-      return await axios.get(baseUrl, { page, limit });
+      const res = await axios.get(finalUrl);
+      return res.data;
     } catch (error) {
       console.error("Failed to fetch employees:", error.message);
     }
   },
-  createEmployee: async ({ name, surname, email, position }) => {
+  getData: async (url, page, limit) => {
     try {
-      return await axios.post(baseUrl, {
-        name,
-        surname,
-        email,
-        position,
-      });
+      const res = await axios.get(url, { page, limit });
+      return res.data;
+    } catch (error) {
+      console.error("Failed to fetch employees:", error.message);
+    }
+  },
+  createRequest: async (url, data) => {
+    try {
+      const res = await axios.post(url, data);
+      return res.data;
     } catch (error) {
       console.error("Failed to create employees:", error.message);
     }
   },
-  deleteEmployee: async (id) => {
+  deleteById: async (url, id) => {
     try {
-      return await axios.delete(`${baseUrl}/${id}`);
+      const res = await axios.delete(`${url}/${id}`);
+      return res.data;
     } catch (error) {
       console.error("Failed to delete employees:", error.message);
     }
   },
-  updateEmployee: async (id, updatedData) => {
+  updateById: async (url, id, updatedData) => {
     try {
-      return await axios.put(`${baseUrl}/${id}`, updatedData);
+      const res = await axios.put(`${url}/${id}`, updatedData);
+      return res.data;
     } catch (error) {
       console.error("Failed to update employees:", error.message);
     }

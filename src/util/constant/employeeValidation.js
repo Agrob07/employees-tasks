@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-export const validationFormik = Yup.object({
+export const employeeValidation = Yup.object({
   name: Yup.string()
     .min(2, "Too Short!")
     .max(50, "Too Long!")

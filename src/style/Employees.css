@@ -54,7 +54,7 @@
   height: 3rem;
   width: 12rem;
   padding: 0.75rem 1.25rem;
-  border-radius: 10rem;
+  border-radius: 4rem;
   color: #fff;
   text-transform: uppercase;
   font-size: 1rem;
@@ -62,7 +62,7 @@
   position: relative;
   overflow: hidden;
   z-index: 1;
-  background-color: rgb(77, 139, 163);
+  background-color: rgb(28, 120, 160);
   cursor: pointer;
 
   &:hover {
@@ -73,30 +73,4 @@
 .employees-list {
   width: 100%;
   height: inherit;
-}
-
-.table-btns {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.employees-list {
-  overflow-x: auto;
-}
-
-.table-wrapper {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.table-wrapper th,
-.table-wrapper td {
-  padding: 8px;
-  border: 1px solid hsl(0, 28%, 45%);
-}
-
-.table-wrapper th {
-  color: rgb(0, 0, 0);
-  background-color: #ebebeb;
 }

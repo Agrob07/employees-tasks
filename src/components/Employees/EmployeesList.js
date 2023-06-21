@@ -9,6 +9,7 @@ import { getColumns } from "../../util/helpers/getColumns";
 import { DELETE, UPDATE } from "../../util/data/actionTypes";
 
 import "../../style/Employees.css";
+import { EMPLOYEES } from "../../util/data/contentTypes";
 
 const EmployeesList = () => {
   const { employees } = useEmployees();
@@ -36,8 +37,11 @@ const EmployeesList = () => {
     () => employees.find((data) => data.id === empId),
     [empId, employees]
   );
-  
-  const columns = useMemo(() => getColumns(employees), [employees]);
+
+  const columns = useMemo(
+    () => getColumns(employees, EMPLOYEES),
+    [employees]
+  );
 
   const finalColumns = useMemo(
     () => [
