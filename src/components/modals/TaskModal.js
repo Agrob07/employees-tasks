@@ -1,11 +1,12 @@
 import React from "react";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+
 import Modal from "./Modal";
 import TaskForm from "../Tasks/TaskForm";
 import { initialActions } from "../../util/data/actions";
 import { api } from "../../api";
 import { taskApi } from "../../util/config";
-import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
 import { fetchAllTasks } from "../../redux/slice/tasksSlice";
 
 const TaskModal = ({ actions, setActions, onEditTask }) => {

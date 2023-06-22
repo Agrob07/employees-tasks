@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+
 import { checkType } from "./checkType";
 import { EMPLOYEES } from "../data/contentTypes";
 

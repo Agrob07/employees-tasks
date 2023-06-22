@@ -5,7 +5,7 @@ import Rows from "./components/Rows";
 import Columns from "./components/Columns";
 import Pagination from "./components/Pagination";
 
-import "../../style/table.css";
+import tableStyle from "../../style/table.module.css";
 
 const DataTable = ({ columns, data }) => {
   const [pageSize] = useState(5);
@@ -29,8 +29,8 @@ const DataTable = ({ columns, data }) => {
   );
 
   return (
-    <div>
-      <table {...getTableProps()} className="table-wrapper">
+    <>
+      <table {...getTableProps()} className={tableStyle.tableWrapper}>
         <thead>
           <Columns headerGroups={headerGroups} />
         </thead>
@@ -48,7 +48,7 @@ const DataTable = ({ columns, data }) => {
           canNextPage={canNextPage}
         />
       ) : null}
-    </div>
+    </>
   );
 };
 

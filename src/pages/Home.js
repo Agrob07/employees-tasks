@@ -1,12 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../style/Home.css";
+
+import pageStyle from "../style/page.module.css";
+import homeStyle from "../style/Home.module.css";
 
 const Home = () => {
   return (
-    <div className="home-wrapper">
-      <Link to={"employees"}> Employees</Link>
-      <Link to={"tasks"}>Tasks</Link>
+    <div className={`${pageStyle.page} ${pageStyle.homePage}`}>
+      <div className={homeStyle.linkGroup}>
+        <Link to={"employees"} className={homeStyle.link}>
+          {" "}
+          Employees
+        </Link>
+        <Link to={"tasks"} className={homeStyle.link}>
+          Tasks
+        </Link>
+      </div>
     </div>
   );
 };

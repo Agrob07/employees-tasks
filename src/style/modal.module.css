@@ -10,7 +10,7 @@
   justify-content: center;
 }
 
-.modal-content {
+.modalContent {
   background-color: white;
   padding: 20px;
   border-radius: 4px;
@@ -18,24 +18,24 @@
   text-align: center;
 }
 
-.modal-buttons {
+.modalButtons {
   margin-top: 20px;
 }
 
-.confirm-button,
-.cancel-button {
+.confirmButton,
+.cancelButton {
   padding: 8px 16px;
   margin: 0 5px;
   border-radius: 4px;
   cursor: pointer;
 }
 
-.confirm-button {
+.confirmButton {
   background-color: #4caf50;
   color: white;
 }
 
-.cancel-button {
+.cancelButton {
   background-color: #f44336;
   color: white;
 }

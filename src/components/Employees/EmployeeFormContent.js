@@ -2,6 +2,7 @@ import React from "react";
 import { Form, useFormikContext } from "formik";
 
 import Modal from "../modals/Modal";
+import pageStyle from "../../style/page.module.css";
 
 const EmployeeFormContent = ({ isModalOpen, handleCancel }) => {
   const { errors, values, touched, submitForm, handleChange } =
@@ -14,7 +15,7 @@ const EmployeeFormContent = ({ isModalOpen, handleCancel }) => {
       onConfirm={() => submitForm()}
     >
       <Form>
-        <div className="item">
+        <div className={pageStyle.item}>
           <label htmlFor="name">Name</label>
           <input
             type="text"
@@ -25,7 +26,7 @@ const EmployeeFormContent = ({ isModalOpen, handleCancel }) => {
           />
           {errors.name && touched.name && <p>{errors.name}</p>}
         </div>
-        <div className="item">
+        <div className={pageStyle.item}>
           <label htmlFor="surname">Surname</label>
           <input
             type="text"
@@ -38,7 +39,7 @@ const EmployeeFormContent = ({ isModalOpen, handleCancel }) => {
             <p>{errors.surname}</p>
           )}
         </div>
-        <div className="item">
+        <div className={pageStyle.item}>
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -50,7 +51,7 @@ const EmployeeFormContent = ({ isModalOpen, handleCancel }) => {
           {errors.email && touched.email && <p>{errors.email}</p>}
         </div>
 
-        <div className="item">
+        <div className={pageStyle.item}>
           <label htmlFor="position">Position</label>
           <input
             type="text"

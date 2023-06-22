@@ -1,7 +1,8 @@
 import React, { useLayoutEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import DataTable from "../table/DataTable";
 import TaskModal from "../modals/TaskModal";
-import { useDispatch, useSelector } from "react-redux";
 import {
   fetchAllTasks,
   selectTaskStatus,
@@ -10,6 +11,8 @@ import {
 import { getColumns } from "../../util/helpers/getColumns";
 import { initialActions } from "../../util/data/actions";
 import { TASKS } from "../../util/data/contentTypes";
+
+import taskStyle from "../../style/tasks.module.css";
 
 const TasksList = () => {
   const [actions, setActions] = useState(initialActions);
@@ -63,7 +66,7 @@ const TasksList = () => {
   return status === "loading" ? (
     <span>Loading...</span>
   ) : (
-    <>
+    <div className={taskStyle.listContainer}>
       {finalColumns.length && (
         <DataTable columns={finalColumns} data={tasks} />
       )}
@@ -72,7 +75,7 @@ const TasksList = () => {
         setActions={setActions}
         onEditTask={onEditTask}
       />
-    </>
+    </div>
   );
 };
 

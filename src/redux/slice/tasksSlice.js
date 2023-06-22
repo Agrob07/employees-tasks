@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
 import { api } from "../../api";
 import { taskApi } from "../../util/config";
 
@@ -21,8 +22,11 @@ export const fetchTasksById = createAsyncThunk(
 
 export const fetchAllTasks = createAsyncThunk(
   "tasks/fetchAllTasks",
-  async () => {
-    const response = await api.getData(taskApi);
+  async (params) => {
+    const queryParams = new URLSearchParams(params);
+    const url = queryParams ? `${taskApi}?${queryParams}` : taskApi;
+
+    const response = await api.getData(url);
     return response;
   }
 );

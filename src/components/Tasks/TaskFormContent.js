@@ -2,6 +2,7 @@ import React from "react";
 import { Form, useFormikContext } from "formik";
 
 import Modal from "../modals/Modal";
+import pageStyle from "../../style/page.module.css";
 
 const TaskFormContent = ({ isModalOpen, handleCancel }) => {
   const { errors, values, touched, submitForm, handleChange } =
@@ -14,7 +15,7 @@ const TaskFormContent = ({ isModalOpen, handleCancel }) => {
       onConfirm={submitForm}
     >
       <Form>
-        <div className="item">
+        <div className={pageStyle.item}>
           <label htmlFor="employeeId">Employee ID</label>
           <input
             type="number"
@@ -26,7 +27,7 @@ const TaskFormContent = ({ isModalOpen, handleCancel }) => {
           />
           {errors.name && touched.name && <p>{errors.name}</p>}
         </div>
-        <div className="item">
+        <div className={pageStyle.item}>
           <label htmlFor="name">Name</label>
           <input
             type="text"
@@ -37,7 +38,7 @@ const TaskFormContent = ({ isModalOpen, handleCancel }) => {
           />
           {errors.name && touched.name && <p>{errors.name}</p>}
         </div>
-        <div className="item">
+        <div className={pageStyle.item}>
           <label htmlFor="description">Description</label>
           <input
             type="text"
@@ -50,7 +51,7 @@ const TaskFormContent = ({ isModalOpen, handleCancel }) => {
             <p>{errors.surname}</p>
           )}
         </div>
-        <div className="item">
+        <div className={pageStyle.item}>
           <label htmlFor="startDate">Start Date</label>
           <input
             type="date"
@@ -64,7 +65,7 @@ const TaskFormContent = ({ isModalOpen, handleCancel }) => {
           {errors.email && touched.email && <p>{errors.email}</p>}
         </div>
 
-        <div className="item">
+        <div className={pageStyle.item}>
           <label htmlFor="endDate">End Date</label>
           <input
             type="date"

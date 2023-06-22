@@ -1,5 +1,6 @@
 import React from "react";
-import "../../style/modal.css";
+
+import modalStyle from "../../style/modal.module.css";
 
 const Modal = ({ isOpen, onConfirm, onCancel, children }) => {
   if (!isOpen) {
@@ -8,18 +9,21 @@ const Modal = ({ isOpen, onConfirm, onCancel, children }) => {
 
   return (
     isOpen && (
-      <div className="modal">
-        <div className="modal-content">
+      <div className={modalStyle.modal}>
+        <div className={modalStyle.modalContent}>
           {children}
-          <div className="modal-buttons">
+          <div className={modalStyle.modalButtons}>
             <button
               type="submit"
-              className="confirm-button"
+              className={modalStyle.confirmButton}
               onClick={onConfirm}
             >
               Confirm
             </button>
-            <button className="cancel-button" onClick={onCancel}>
+            <button
+              className={modalStyle.cancelButton}
+              onClick={onCancel}
+            >
               Cancel
             </button>
           </div>

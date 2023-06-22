@@ -1,0 +1,27 @@
+.linkGroup {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  gap: 2rem;
+}
+
+.link {
+  padding: 1rem 1.1rem;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  color: #ffffff;
+  border-radius: 0.4rem;
+  border-style: none;
+  background-color: #ea4c89;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: color 100ms;
+
+  &:hover {
+    background-color: #f082ac;
+  }
+}

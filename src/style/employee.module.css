@@ -1,0 +1,44 @@
+.listContainer {
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  overflow: scroll;
+  scroll-behavior: smooth;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.infoItems {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.infoItems > span {
+  font-family: Lucida Handwriting;
+  font-size: 16px;
+  color: #3e4347;
+  font-weight: bold;
+}
+
+.heading {
+  font-size: 5rem;
+  font-weight: 600;
+  background-image: conic-gradient(
+    #553c9a 0%,
+    #553c9a 33%,
+    #ee4b2b 33%,
+    #ee4b2b 66%,
+    #1d64e9 66%,
+    #8b7513 99%
+  );
+  color: transparent;
+  background-clip: text;
+}

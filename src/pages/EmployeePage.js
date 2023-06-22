@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   fetchUserById,
   selectEmployee,
@@ -8,11 +10,12 @@ import {
 import {
   fetchTasksById,
   selectEmployeeTasks,
-  selectEmployeeTaskStatus,
 } from "../redux/slice/tasksSlice";
-import { useDispatch, useSelector } from "react-redux";
 import { getColumns } from "../util/helpers/getColumns";
 import DataTable from "../components/table/DataTable";
+
+import pageStyle from "../style/page.module.css";
+import employeeStyle from "../style/employee.module.css";
 
 const EmployeePage = () => {
   const { id } = useParams();
@@ -20,7 +23,6 @@ const EmployeePage = () => {
   const employee = useSelector(selectEmployee);
   const employeeStatus = useSelector(selectEmployeeStatus);
   const tasks = useSelector(selectEmployeeTasks);
-  const tasksStatus = useSelector(selectEmployeeTaskStatus);
 
   useEffect(() => {
     dispatch(fetchUserById(id));
@@ -32,38 +34,40 @@ const EmployeePage = () => {
     [tasks]
   );
   return (
-    <div>
+    <div
+      className={`${pageStyle.page} ${pageStyle.singleEmployeePage}`}
+    >
       {employeeStatus === "loading" ? (
         <span>Loading...</span>
       ) : (
-        <div
-          style={{
-            display: "flex",
-            flexFlow: "column wrap",
-            gap: "1rem",
-          }}
-        >
-          {employee ? (
-            Object.keys(employee).map((key, idx) => (
-              <span key={idx}>
-                {key.toUpperCase()}: {employee[key]}
+        <div className={employeeStyle.info}>
+          <span className={employeeStyle.heading}>
+            Employee Details
+          </span>
+          <div className={employeeStyle.infoItems}>
+            {employee ? (
+              Object.keys(employee).map((key, idx) => (
+                <span key={idx}>
+                  {key.toUpperCase()}: {employee[key]}
+                </span>
+              ))
+            ) : (
+              <span>
+                No such an employee yet, but he/she already could have
+                tasks
               </span>
-            ))
-          ) : (
-            <span style={{ color: "red" }}>
-              No such an employee yet, but he/she already could have
-              tasks <span>":)"</span>
-            </span>
-          )}
-
-          {columns.length ? (
-            <DataTable columns={columns} data={tasks} />
-          ) : (
-            <span style={{ color: "red" }}>
-              No tasks yet for this employee
-            </span>
-          )}
+            )}
+          </div>
         </div>
+      )}
+      {columns.length ? (
+        <div className={employeeStyle.listContainer}>
+          <DataTable columns={columns} data={tasks} />
+        </div>
+      ) : (
+        <span style={{ color: "red" }}>
+          No tasks yet for this employee
+        </span>
       )}
     </div>
   );

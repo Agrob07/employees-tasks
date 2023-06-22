@@ -8,8 +8,9 @@ import { initialActions } from "../../util/data/actions";
 import { getColumns } from "../../util/helpers/getColumns";
 import { DELETE, UPDATE } from "../../util/data/actionTypes";
 
-import "../../style/Employees.css";
 import { EMPLOYEES } from "../../util/data/contentTypes";
+
+import employeesStyle from "../../style/employees.module.css";
 
 const EmployeesList = () => {
   const { employees } = useEmployees();
@@ -50,7 +51,7 @@ const EmployeesList = () => {
         Header: "Actions",
         Cell: ({ row }) => {
           return (
-            <div className="table-btns">
+            <div className={employeesStyle.tableBtns}>
               <button
                 onClick={(e) =>
                   handleAction(e.target.innerText, row.original.id)
@@ -75,7 +76,7 @@ const EmployeesList = () => {
 
   return (
     <>
-      <div className="employees-list">
+      <div className={employeesStyle.listContainer}>
         {employees && (
           <DataTable columns={finalColumns} data={employees} />
         )}

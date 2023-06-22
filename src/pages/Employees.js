@@ -1,11 +1,13 @@
 import React from "react";
-import "../style/Employees.css";
+
 import EmployeesList from "../components/Employees/EmployeesList";
 import AddEmployee from "../components/Employees/AddEmployee";
 
+import pageStyle from "../style/page.module.css";
+
 const Employees = () => {
   return (
-    <div className="wrapper">
+    <div className={`${pageStyle.page} ${pageStyle.employeesPage}`}>
       <AddEmployee />
       <EmployeesList />
     </div>
